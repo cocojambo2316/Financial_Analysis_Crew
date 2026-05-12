@@ -1,0 +1,11 @@
+{
+  "agent": "news",
+  "tickers": [
+    "AAPL",
+    "CDR.WA",
+    "TSLA"
+  ],
+  "db_signature": "1778168837148554800:2895872:a04f11c22b71c26b308d610e58a3fdd67eb330c5cf1437ef5f3b84906ea4878e",
+  "report": "*   **CDR.WA**: News on \"Witcher 4 And New IP At CD Projekt Get Fresh Updates\" suggests positive developments for the company, potentially driving the observed volatility. Bullish.\n*   **AAPL**: News regarding Apple crossing 10% of sales on AI R&D and a massive buyback indicates strategic growth and investor confidence. Bullish.\n*   **TSLA**: Despite \"Spluttering Chinese EV Demand,\" Tesla stock motors on, coupled with a director offloading nearly $10 million in stock. Neutral.",
+  "created_at": "2026-05-07T19:19:48"
+}

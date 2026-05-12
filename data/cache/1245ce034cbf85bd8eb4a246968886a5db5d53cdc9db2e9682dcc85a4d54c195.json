@@ -1,0 +1,10 @@
+{
+  "agent": "tech",
+  "tickers": [
+    "AAPL",
+    "TSLA"
+  ],
+  "db_signature": "1778168837148554800:2895872",
+  "report": "### Market Anomaly Report\n\n| Ticker | Volatility_Pct | AvgDailyVolume | DateNegSigmaReturn | ValueNegSigmaReturn_Pct | DatePosSigmaVolume | ValuePosSigmaVolume |\n|:-------|:---------------|:---------------|:-------------------|:------------------------|:-------------------|:--------------------|\n| AAPL   | 42.97          | 40708200       | NaN                | NaN                     | 2025-06-05         | 287499800           |\n| CDR.WA | 2.17           | 296550         | 2026-01-30         | -8.00                   | 2026-03-20         | 1262633             |\n| TSLA   | 2.97           | 82117156       | 2025-06-05         | -14.26                  | 2025-06-05         | 287499800           |\n\n*   AAPL shows a significant positive volume sigma event on 2025-06-05.\n*   CDR.WA experienced a notable negative return sigma event on 2026-01-30 and a positive volume sigma event on 2026-03-20.\n*   TSLA registered a substantial negative return sigma event and a large positive volume sigma event, both on 2025-06-05.\n*   AAPL exhibits the highest volatility among the analyzed tickers.\n*   TSLA and AAPL share the same date for their respective positive volume sigma events, which could indicate a broader market event.",
+  "created_at": "2026-05-07T19:39:22"
+}

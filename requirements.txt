@@ -1,0 +1,6 @@
+crewai
+duckdb
+pandas
+python-dotenv
+yfinance
+plotly
