@@ -1,6 +1,9 @@
 from pathlib import Path
 import sys
 import hashlib
+import os
+import json
+import tempfile
 
 import streamlit as st
 import pandas as pd
@@ -12,8 +15,38 @@ from datetime import datetime, timedelta
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
+# --- write GCP service-account from Streamlit Secrets (if provided) ---
+try:
+    if hasattr(st, "secrets") and "gcp_service_account" in st.secrets:
+        sa = st.secrets.get("gcp_service_account")
+        if isinstance(sa, dict):
+            sa_text = json.dumps(sa)
+        else:
+            sa_text = sa
+        os.makedirs("keys", exist_ok=True)
+        sa_path = os.path.join("keys", "service_account.json")
+        with open(sa_path, "w", encoding="utf-8") as f:
+            f.write(sa_text)
+        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = sa_path
+        os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = "true"
+        if "gcp_project" in st.secrets:
+            os.environ["GOOGLE_CLOUD_PROJECT"] = st.secrets.get("gcp_project")
+except Exception:
+    # non-fatal; continue without secrets
+    pass
 
-from src.agents.all_agents import ANALYSTS
+# --- lazy import agents so app can run without GCP key in demo mode ---
+ANALYSTS = {}
+if os.environ.get("DISABLE_AGENTS", "0").lower() not in ("1", "true", "yes"):
+    try:
+        from src.agents.all_agents import ANALYSTS as _ANALYSTS
+
+        ANALYSTS = _ANALYSTS
+    except Exception:
+        import logging
+
+        logging.exception("Failed to import agents; running in demo mode")
+        st.warning("Agents unavailable — running in demo mode. Set GOOGLE_APPLICATION_CREDENTIALS or DISABLE_AGENTS=1 to suppress this message.")
 from src.cache_store import analysis_cache_key, db_signature, load_json_cache, normalize_tickers, save_json_cache
 from src.pipeline.extract import get_stock_data
 
